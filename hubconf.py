@@ -29,7 +29,7 @@ def geneTCN():
     return model
 
 def geneTCN_protozoa():
-    """ Pretrained Temporal Convolutional Network for bacterial gene identification."""
+    """ Pretrained Temporal Convolutional Network for protozoan gene identification."""
     
     dirname = os.path.dirname(__file__)
     checkpoint = os.path.join(dirname, "weights/geneTCN_protozoa.pt")
