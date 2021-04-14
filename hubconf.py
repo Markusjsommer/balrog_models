@@ -28,6 +28,28 @@ def geneTCN():
     model.load_state_dict(state_dict)
     return model
 
+def geneTCN_protozoa():
+    """ Pretrained Temporal Convolutional Network for protozoan gene identification."""
+    
+    dirname = os.path.dirname(__file__)
+    checkpoint = os.path.join(dirname, "weights/geneTCN_protozoa.pt")
+    if torch.cuda.device_count() > 0:
+        state_dict = torch.load(checkpoint)
+    else:
+        state_dict = torch.load(checkpoint, map_location=torch.device('cpu'))
+
+    input_channels = 21
+    n_classes = 1
+    kernel_size = 8
+    dropout = 0.05
+    hidden_units_per_layer = 32
+    levels = 5
+    channel_sizes = [hidden_units_per_layer] * levels
+    
+    model = TCN_allhidden(input_channels, n_classes, channel_sizes, kernel_size=kernel_size, dropout=dropout)
+    model.load_state_dict(state_dict)
+    return model
+
 def tisTCN():
     """ Pretrained Temporal Convolutional Network for bacterial translation initiation site identification."""
 
